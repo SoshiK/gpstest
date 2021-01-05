@@ -19,26 +19,21 @@ export default function GPS() {
       setRes("SIppai");
     }
     navigator.geolocation.getCurrentPosition(success, fail);
-  },[])
+  },[]);
   const click = () => {
     fetch(`/api/distance?lat=${lat}&lng=${lng}`)
       .then((res) => res.json())
       .then((data) => setDis(data.dis));
   }
   return(
-    <>
     <div>
-      lat: {lat}
-      lng: {lng}
-      suc: {res}
-
-      <iframe src="https://open.spotify.com/embed/track/5vnTYL1H4uGzNaMB14wagO" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/episode/2Ej7BKE5R7MnuTDEqeY3dB" width="300" height="150" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      <p>lat: {lat}</p>
+      <p>lng: {lng}</p>
+      <p>suc: {res}</p>
+      <p><iframe src="https://open.spotify.com/embed/track/5vnTYL1H4uGzNaMB14wagO" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
+      <p><iframe src="https://open.spotify.com/embed/episode/2Ej7BKE5R7MnuTDEqeY3dB" width="300" height="150" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
+      <p><button onClick={click}>click</button></p>
+      <p>{dis}</p>
     </div>
-    <div>
-      <button onClick={click}>click</button>
-      <div>{dis}</div>
-    </div>
-    </>
   )
 }

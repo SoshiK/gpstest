@@ -3,9 +3,6 @@ import './App.css';
 import GPS from "./GPS.js";
 
 function App() {
-
-
-  
   return (
     <div className="App">
       <header className="App-header">
@@ -21,8 +18,8 @@ function App() {
         >
           Learn React
         </a>
-        <GPS />
       </header>
+      <GPS />
     </div>
   );
 }
