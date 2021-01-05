@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 app.use(cors())
 
+const PORT = process.env.PORT || 8000;
+
 app.get("/api/hello", (req, res) => {
   res.send({hello:"hello world"});
 })
@@ -22,6 +24,6 @@ app.get("/api/distance", (req, res) => {
 
 })
 
-app.listen(8000,() => {
-  console.log(`The server has started on 8000`);
+app.listen(PORT,() => {
+  console.log(`The server has started on ${PORT}`);
 })
