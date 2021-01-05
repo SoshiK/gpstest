@@ -25,6 +25,7 @@ app.get("/api/distance", (req, res) => {
 })
 
 app.get("*", (req, res) => {
+  console.log(path.resolve(__dirname, "..", "build", "index.html"));
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
