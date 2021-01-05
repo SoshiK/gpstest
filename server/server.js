@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 app.use(cors())
 
 const PORT = process.env.PORT || 8000;
@@ -21,8 +22,11 @@ app.get("/api/distance", (req, res) => {
   const lng2PI = lng2 * Math.PI / 180;
   const dis = 6371 * Math.acos(Math.cos(lat1PI) * Math.cos(lat2PI) * Math.cos(lng2PI - lng1PI) + Math.sin(lat1PI) * Math.sin(lat2PI));
   res.send({dis: dis});
-
 })
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
 
 app.listen(PORT,() => {
   console.log(`The server has started on ${PORT}`);
