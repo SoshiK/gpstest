@@ -24,6 +24,8 @@ export default function GPS() {
       lat: {lat}
       lng: {lng}
       suc: {res}
+      <iframe src="https://open.spotify.com/embed/track/5vnTYL1H4uGzNaMB14wagO" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
   )
 }
+
