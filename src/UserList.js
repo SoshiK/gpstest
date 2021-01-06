@@ -9,6 +9,7 @@ export default function UserList(props) {
         name = {user.name}
         dis = {user.dis}
         key= {user.name}
+        url={user.url}
       />
     )
   }

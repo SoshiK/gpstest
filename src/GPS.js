@@ -5,7 +5,7 @@ export default function GPS() {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [res, setRes] = useState("");
-  const [dis, setDis] = useState("");
+  const [km, setKm] = useState(0);
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const success = (pos) => {
@@ -22,26 +22,29 @@ export default function GPS() {
     }
     navigator.geolocation.getCurrentPosition(success, fail);
   },[]);
-  const click = () => {
-    fetch(`/api/distance?lat=${lat}&lng=${lng}`)
-      .then((res) => res.json())
-      .then((data) => setDis(data.dis));
-  }
   const click2 = () => {
     fetch(`/api/nearby?lat=${lat}&lng=${lng}`)
       .then((res) => res.json())
       .then((data) => setUsers(data));
+  }
+  const inputText = (e) => {
+    setKm(Number(e.target.value));
+  }
+  const filterClick = () => {
+    fetch(`/api/filter?km=${km}&lat=${lat}&lng=${lng}`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
   }
   return(
     <div>
       <p>lat: {lat}</p>
       <p>lng: {lng}</p>
       <p>suc: {res}</p>
-      <p><iframe src="https://open.spotify.com/embed/track/5vnTYL1H4uGzNaMB14wagO" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
-      <p><iframe src="https://open.spotify.com/embed/episode/2Ej7BKE5R7MnuTDEqeY3dB" width="300" height="150" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
-      <p><button onClick={click}>click</button></p>
-      <p>{dis}</p>
       <p><button onClick={click2}>showNearbyUser</button></p>
+      <div>
+        <input type="text" onChange={inputText} /> km
+        <button onClick={filterClick}>filter</button>
+      </div>
       <UserList users={users} />
     </div>
   )
