@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import UserList from "./UserList";
 
 export default function GPS() {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [res, setRes] = useState("");
   const [dis, setDis] = useState("");
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     const success = (pos) => {
       console.log("success");
@@ -25,6 +27,11 @@ export default function GPS() {
       .then((res) => res.json())
       .then((data) => setDis(data.dis));
   }
+  const click2 = () => {
+    fetch(`/api/nearby?lat=${lat}&lng=${lng}`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }
   return(
     <div>
       <p>lat: {lat}</p>
@@ -34,6 +41,8 @@ export default function GPS() {
       <p><iframe src="https://open.spotify.com/embed/episode/2Ej7BKE5R7MnuTDEqeY3dB" width="300" height="150" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
       <p><button onClick={click}>click</button></p>
       <p>{dis}</p>
+      <p><button onClick={click2}>showNearbyUser</button></p>
+      <UserList users={users} />
     </div>
   )
 }
